@@ -5,7 +5,7 @@ with open('cdr.csv', newline='') as csvfile:  #Read csv file
     closes = [x[4] for x in spamreader] #'Close' column from csv
     closes.remove(closes[0])
 
-123
+
 def moving_avg(prices, window_size): #Moving average for close prices
     avg = []
     for x in range(0, len(closes) - window_size+1):
