@@ -23,5 +23,3 @@ def moving_min(prices, window_size): #Moving minimum for close prices
         number = min(new_prices)
         avg.append(number)
     return avg
-
-
