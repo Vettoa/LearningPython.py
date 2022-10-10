@@ -5,8 +5,8 @@ with open('E:\Python\cdr.csv', newline='') as csvfile:  #Read csv file
     spam = list(spamreader)
     spam.remove(spam[0])
     closes = list(map(lambda x: float(x[4]), spam)) #'Close' column from csv
-    high = list(map(lambda x: float(x[2]), spam)) #'High prices' column from csv
-    low = list(map(lambda x: float(x[3]), spam)) #'Low prices' column from csv
+    data_high_low = list(map(lambda x: (x[0], float(x[2]), float(x[3])), spam)) #'Data' with higher prices and lower prices
+    data_open_close = list(map(lambda x: (x[0], float(x[1]), float(x[4])), spam)) #'Data' with higher prices and lower prices
 
 def moving_avg(prices, window_size): #Moving average for close prices
     avg = []
@@ -24,12 +24,17 @@ def moving_min(prices, window_size): #Moving minimum for close prices
         avg.append(number)
     return avg
 
-def max_min_diff():
-    return [round(highs - lows,2) for highs, lows in zip(high, low)]
+def single_candle_height(data): #Single candle height
+    return [round(highs - lows,2) for data, highs, lows in data]
 
 def calculate_support(prices, window_size, ratio = 0.1): #Calculating support for prices
     minimum_avg = moving_min(prices, window_size)
-    high_low_list = max_min_diff()
+    high_low_list = [round(highs - lows,2) for data, highs, lows in data_high_low]
     supp_avg = [round(values - (diff * ratio), 2) for values, diff in zip(minimum_avg, high_low_list)]
 
     return supp_avg
+
+def find_doji(data): #Finding doji
+    doji = list(map(lambda x: abs(x[1]- x[2]), data))
+    data_list = list(zip(doji, data))
+    return '{}'.format(min(data_list)[1][0])
