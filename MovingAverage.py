@@ -1,6 +1,6 @@
 import csv
 
-with open('cdr.csv', newline='') as csvfile:  #Read csv file
+with open('E:\Python\cdr.csv', newline='') as csvfile:  #Read csv file
     spamreader = csv.reader(csvfile, delimiter=',')
     spam = list(spamreader)
     spam.remove(spam[0])
@@ -24,9 +24,12 @@ def moving_min(prices, window_size): #Moving minimum for close prices
         avg.append(number)
     return avg
 
+def max_min_diff():
+    return [round(highs - lows,2) for highs, lows in zip(high, low)]
+
 def calculate_support(prices, window_size, ratio = 0.1): #Calculating support for prices
     minimum_avg = moving_min(prices, window_size)
-    high_low_list = [highs - lows for highs, lows in zip(high,low)]
+    high_low_list = max_min_diff()
     supp_avg = [round(values - (diff * ratio), 2) for values, diff in zip(minimum_avg, high_low_list)]
 
     return supp_avg
