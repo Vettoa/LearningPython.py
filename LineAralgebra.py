@@ -12,7 +12,7 @@ class Matrix:
                     raise TypeError('All columns must be the same length.')
             for x in array:
                 for y in x:
-                    if not isinstance(y, (int, float)):
+                    if not isinstance(y, (int, float)) or type(y) == bool:
                         raise TypeError('The values must be of type int or float.')
             self.array = array
         else:
@@ -22,7 +22,30 @@ class Matrix:
     def __repr__(self):
         return str(self.array)
 
+    @property
+    def n_rows(self):
+        return len(self.array)
 
-mat = Matrix([[1,1], [1,1]])
+    @property
+    def n_cols(self):
+        if len(self.array) == 0:
+            return 0
+        else:
+            return len(self.array[0])
 
-print(mat)
+    @property
+    def size(self):
+            return (self.n_rows, self.n_cols)\
+
+    @property
+    def is_square_matrix(self):
+        if self.n_cols == self.n_rows:
+            return True
+        else:
+            return False
+
+mat = Matrix([[1,1],[1,1]])
+
+print(mat.is_square_matrix)
+
+#print(type(True))
