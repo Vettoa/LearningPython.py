@@ -43,9 +43,3 @@ class Matrix:
             return True
         else:
             return False
-
-mat = Matrix([[1,1],[1,1]])
-
-print(mat.is_square_matrix)
-
-#print(type(True))
