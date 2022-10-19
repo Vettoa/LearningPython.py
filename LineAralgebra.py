@@ -27,7 +27,7 @@ class Matrix:
         return len(self.array)
 
     @property
-    def n_cols(self):   #Lenght nested list
+    def n_cols(self): #Lenght nested list
         if len(self.array) == 0:
             return 0
         else:
@@ -56,3 +56,41 @@ class Matrix:
             return matrix
         else:
             return None
+
+    def add_row(self, row, index=None):#Add row to array
+
+        if not isinstance(row, list):
+            raise TypeError('To create a matrix you need to pass a nested list of values.')
+
+        for x in row:
+            if not isinstance(x, (int, float)):
+                raise TypeError('The values must be of type int or float.')
+
+        if len(row) != self.n_cols:
+            raise ValueError('The row must be the same length as the number of columns in the matrix.')
+
+        if index is None:
+            self.array.append(row)
+        else:
+            self.array.insert(index, row)
+
+    def add_column(self, column, index=None): #Add column to array
+
+        if not isinstance(column, list):
+            raise TypeError('To create a matrix you need to pass a nested list of values.')
+
+        for x in column:
+            if not isinstance(x, (int, float)):
+                raise TypeError('The values must be of type int or float.')
+
+        if len(column) != self.n_rows:
+            raise ValueError('The row must be the same length as the number '
+                'of columns in the matrix.')
+
+        if index is None:
+            for i in range(0, len(self.array)):
+                self.array[i].append(column[i])
+
+        else:
+            for i in range(0, len(self.array)):
+                self.array[i].insert(index, column[i])
