@@ -22,6 +22,14 @@ class Matrix:
     def __repr__(self):
         return str(self.array)
 
+    def __eq__(self, other):
+        if not isinstance(other, Matrix):
+            raise TypeError("It isn't a Matrix class")
+        return self.array == other.array
+
+    def __ne__(self, other):
+        return not self == other
+
     @property
     def n_rows(self): #Lenght list array
         return len(self.array)
