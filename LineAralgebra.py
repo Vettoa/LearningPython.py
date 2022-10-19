@@ -23,23 +23,41 @@ class Matrix:
         return str(self.array)
 
     @property
-    def n_rows(self):
+    def n_rows(self): #Lenght list array
         return len(self.array)
 
     @property
-    def n_cols(self):
+    def n_cols(self):   #Lenght nested list
         if len(self.array) == 0:
             return 0
         else:
             return len(self.array[0])
 
     @property
-    def size(self):
-            return (self.n_rows, self.n_cols)\
+    def size(self): #(Len array, len nested list)
+        return (self.n_rows, self.n_cols)\
 
     @property
-    def is_square_matrix(self):
+    def is_square_matrix(self): #Checking the matrix is a square matrix
         if self.n_cols == self.n_rows:
             return True
         else:
             return False
+
+    def zero(self): #Changing value in array to 0
+        zero = [[0 for x in range(0, self.n_cols)] for y in range(0, self.n_rows)]
+        return zero
+
+    def identity(self): #Unit matrix for square matrices
+        if self.is_square_matrix:
+            matrix = self.zero()
+            for x in range(0, len(matrix)):
+                matrix[x][x] = 1
+            return matrix
+        else:
+            return None
+
+matr = Matrix([[1,2,3],[1,2,3]])
+
+print(matr.identity())
+#print(matr.array)
