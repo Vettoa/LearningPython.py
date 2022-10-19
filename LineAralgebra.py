@@ -56,8 +56,3 @@ class Matrix:
             return matrix
         else:
             return None
-
-matr = Matrix([[1,2,3],[1,2,3]])
-
-print(matr.identity())
-#print(matr.array)
