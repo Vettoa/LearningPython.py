@@ -25,25 +25,39 @@ class Matrix:
     def __eq__(self, other):
         if not isinstance(other, Matrix):
             raise TypeError("It isn't a Matrix class")
+
         return self.array == other.array
 
     def __ne__(self, other):
         return not self == other
+
+    def __add__(self, other):
+        if not isinstance(other, Matrix):
+            raise TypeError("It isn't a Matrix class")
+
+        if self.size != other.size:
+            raise ValueError('The matrices must be of the same size.')
+
+        array = self.array.copy()
+        for x, y in zip(array, other.array):
+            for a, b in zip(x, y):
+                x[x.index(a)] = a + b
+
+        return Matrix(array)
 
     @property
     def n_rows(self): #Lenght list array
         return len(self.array)
 
     @property
-    def n_cols(self): #Lenght nested list
+    def n_cols(self): #Lenght columns list
         if len(self.array) == 0:
             return 0
-        else:
-            return len(self.array[0])
+        return len(self.array[0])
 
     @property
-    def size(self): #(Len array, len nested list)
-        return (self.n_rows, self.n_cols)\
+    def size(self): #(Len array, len columns list)
+        return (self.n_rows, self.n_cols)
 
     @property
     def is_square_matrix(self): #Checking the matrix is a square matrix
@@ -102,3 +116,4 @@ class Matrix:
         else:
             for i in range(0, len(self.array)):
                 self.array[i].insert(index, column[i])
+
