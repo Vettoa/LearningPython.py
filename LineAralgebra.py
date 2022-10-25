@@ -136,4 +136,20 @@ class Matrix:
         for x in range(self.n_cols):
             for y in range(self.n_rows):
                 array[x].append(self.array[y][x])
-        return array
+        return Matrix(array)
+
+    def multiply_elementwise(self, other): #Multiplication elements
+        if not isinstance(other, Matrix):
+            raise TypeError("It isn't a Matrix class")
+
+        if self.size != other.size:
+            raise ValueError('The matrices must be of the same size.')
+
+        array = []
+        for i in range(self.n_rows):
+            rows = []
+            for x, y in zip(self.array[i], other.array[i]):
+                rows.append(x*y)
+            array.append(rows)
+        return Matrix(array)
+
