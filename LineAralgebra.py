@@ -137,8 +137,3 @@ class Matrix:
             for y in range(self.n_rows):
                 array[x].append(self.array[y][x])
         return array
-
-m1 = Matrix([[1, 4, 3], [5, 2, 3]])
-m2 = Matrix([[2, 5], [1, 3]])
-
-print(m2.transpose())
