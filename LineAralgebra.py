@@ -44,6 +44,20 @@ class Matrix:
                 x[x.index(a)] = a + b
 
         return Matrix(array)
+    def __sub__(self, other):
+        if not isinstance(other, Matrix):
+            raise TypeError("It isn't a Matrix class")
+
+        if self.size != other.size:
+            raise ValueError('The matrices must be of the same size.')
+
+        array = self.array.copy()
+        for x, y in zip(array, other.array):
+            for a, b in zip(x, y):
+                x[x.index(a)] = a - b
+
+        return Matrix(array)
+
 
     @property
     def n_rows(self): #Lenght list array
@@ -117,3 +131,14 @@ class Matrix:
             for i in range(0, len(self.array)):
                 self.array[i].insert(index, column[i])
 
+    def transpose(self):    #Changing columns with rows
+        array = [[] for x in range(self.n_cols)]
+        for x in range(self.n_cols):
+            for y in range(self.n_rows):
+                array[x].append(self.array[y][x])
+        return array
+
+m1 = Matrix([[1, 4, 3], [5, 2, 3]])
+m2 = Matrix([[2, 5], [1, 3]])
+
+print(m2.transpose())
