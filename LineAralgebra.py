@@ -153,3 +153,15 @@ class Matrix:
             array.append(rows)
         return Matrix(array)
 
+    @classmethod
+    def dot(cls, row, column):
+        if not isinstance(row, list) and not isinstance(column, list):
+            raise TypeError("It isn't a list")
+        if len(row) != len(column):
+            raise ValueError('The lists must be of the same size.')
+        array = 0
+        for x, y in zip(row, column):
+            array += x*y
+
+        return array
+
